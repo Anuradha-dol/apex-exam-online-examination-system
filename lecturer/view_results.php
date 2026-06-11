@@ -1,7 +1,14 @@
-﻿<?php
+<?php
 include "../includes/auth_check.php";
 checkRole('lecturer');
 include "../config/db.php";
+
+if (isset($_GET['delete'])) {
+    $id = $_GET['delete'];
+    $stmt = $conn->prepare("DELETE FROM results WHERE result_id=?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+}
 
 $results = $conn->query("
 SELECT r.*, s.name AS student_name, e.exam_title
@@ -20,7 +27,7 @@ include "../includes/header.php";
     <div class="table-wrap">
         <table>
             <thead>
-                <tr><th>Student</th><th>Exam</th><th>Marks</th><th>Date</th></tr>
+                <tr><th>Student</th><th>Exam</th><th>Marks</th><th>Date</th><th>Action</th></tr>
             </thead>
             <tbody>
                 <?php while($r = $results->fetch_assoc()): ?>
@@ -29,6 +36,7 @@ include "../includes/header.php";
                     <td><?= htmlspecialchars($r['exam_title']) ?></td>
                     <td><?= (int)$r['marks'] ?> / <?= (int)$r['total_marks'] ?></td>
                     <td><?= htmlspecialchars($r['submitted_at']) ?></td>
+                    <td><a class="btn danger" href="?delete=<?= (int)$r['result_id'] ?>" onclick="return confirm('Delete this mark?')">Delete</a></td>
                 </tr>
                 <?php endwhile; ?>
             </tbody>
