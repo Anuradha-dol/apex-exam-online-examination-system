@@ -25,5 +25,7 @@ include "../includes/header.php";
 ?>
 <div class="card">
     <h2>Exam Performance</h2>
+    <h3><?= htmlspecialchars($result['exam_title']) ?></h3>
+    <p class="form-note">This result reflects your completed exam performance. Use it to identify stronger topics and areas for review.</p>
 </div>
 <?php include "../includes/footer.php"; ?>
