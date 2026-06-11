@@ -3,6 +3,7 @@ include "../includes/auth_check.php";
 checkRole('admin');
 include "../config/db.php";
 
+$pageTitle = "Manage Modules | Apex Exam";
 $editModule = null;
 
 if (isset($_POST['add_module']) || isset($_POST['update_module'])) {

@@ -3,6 +3,7 @@ include "../includes/auth_check.php";
 checkRole('lecturer');
 include "../config/db.php";
 
+$pageTitle = "Add Question | Apex Exam";
 if (isset($_POST['add_question'])) {
     $exam_id = $_POST['exam_id'];
     $question_text = $_POST['question_text'];

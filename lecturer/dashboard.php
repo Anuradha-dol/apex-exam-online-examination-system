@@ -1,6 +1,7 @@
 <?php
 include "../includes/auth_check.php";
 checkRole('lecturer');
+$pageTitle = "Lecturer Dashboard | Apex Exam";
 include "../includes/header.php";
 ?>
 <div class="dashboard-page">

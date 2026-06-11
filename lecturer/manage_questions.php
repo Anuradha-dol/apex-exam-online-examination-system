@@ -3,6 +3,7 @@ include "../includes/auth_check.php";
 checkRole('lecturer');
 include "../config/db.php";
 
+$pageTitle = "Manage Questions | Apex Exam";
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
     $stmt = $conn->prepare("DELETE FROM questions WHERE question_id=?");

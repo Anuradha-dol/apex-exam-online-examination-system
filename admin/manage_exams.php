@@ -4,6 +4,7 @@ checkRole('admin');
 include "../config/db.php";
 include "../includes/exam_helpers.php";
 
+$pageTitle = "Manage Exams | Apex Exam";
 $columnCheck = $conn->query("SHOW COLUMNS FROM exams LIKE 'exam_instructions'");
 if ($columnCheck && $columnCheck->num_rows === 0) {
     $conn->query("ALTER TABLE exams ADD COLUMN exam_instructions TEXT NULL");
