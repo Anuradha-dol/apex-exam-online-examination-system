@@ -7,39 +7,51 @@ $pageTitle = "Manage Modules | Apex Exam";
 $editModule = null;
 
 if (isset($_POST['add_module']) || isset($_POST['update_module'])) {
-    $module_code = $_POST['module_code'];
-    $module_name = $_POST['module_name'];
-    $lecturer_id = $_POST['lecturer_id'];
+    $module_code = trim($_POST['module_code'] ?? '');
+    $module_name = trim($_POST['module_name'] ?? '');
+    $lecturer_id = (int)($_POST['lecturer_id'] ?? 0);
 
-    if (isset($_POST['update_module']) && isset($_POST['module_id'])) {
-        $module_id = $_POST['module_id'];
-        $stmt = $conn->prepare("UPDATE modules SET module_code=?, module_name=?, lecturer_id=? WHERE module_id=?");
-        $stmt->bind_param("ssii", $module_code, $module_name, $lecturer_id, $module_id);
-        $stmt->execute();
-    } else {
-        $stmt = $conn->prepare("INSERT INTO modules (module_code,module_name,lecturer_id) VALUES (?,?,?)");
-        $stmt->bind_param("ssi", $module_code, $module_name, $lecturer_id);
-        $stmt->execute();
+    if ($module_code !== '' && $module_name !== '' && $lecturer_id > 0) {
+        if (isset($_POST['update_module']) && isset($_POST['module_id'])) {
+            $module_id = (int)$_POST['module_id'];
+            $stmt = $conn->prepare("UPDATE modules SET module_code=?, module_name=?, lecturer_id=? WHERE module_id=?");
+            $stmt->bind_param("ssii", $module_code, $module_name, $lecturer_id, $module_id);
+            $stmt->execute();
+        } else {
+            $stmt = $conn->prepare("INSERT INTO modules (module_code,module_name,lecturer_id) VALUES (?,?,?)");
+            $stmt->bind_param("ssi", $module_code, $module_name, $lecturer_id);
+            $stmt->execute();
+        }
     }
+
+    header("Location: manage_modules.php");
+    exit();
 }
 
 if (isset($_GET['delete'])) {
-    $id = $_GET['delete'];
-    $stmt = $conn->prepare("DELETE FROM modules WHERE module_id=?");
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
+    $id = (int)$_GET['delete'];
+    if ($id > 0) {
+        $stmt = $conn->prepare("DELETE FROM modules WHERE module_id=?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+    }
+
+    header("Location: manage_modules.php");
+    exit();
 }
 
 if (isset($_GET['edit'])) {
-    $edit_id = $_GET['edit'];
-    $stmt = $conn->prepare("SELECT * FROM modules WHERE module_id=?");
-    $stmt->bind_param("i", $edit_id);
-    $stmt->execute();
-    $editModule = $stmt->get_result()->fetch_assoc();
+    $edit_id = (int)$_GET['edit'];
+    if ($edit_id > 0) {
+        $stmt = $conn->prepare("SELECT * FROM modules WHERE module_id=?");
+        $stmt->bind_param("i", $edit_id);
+        $stmt->execute();
+        $editModule = $stmt->get_result()->fetch_assoc();
+    }
 }
 
-$lecturers = $conn->query("SELECT user_id,name FROM users WHERE role='lecturer'");
-$modules = $conn->query("SELECT m.*, u.name AS lecturer_name FROM modules m LEFT JOIN users u ON m.lecturer_id=u.user_id");
+$lecturers = $conn->query("SELECT user_id,name FROM users WHERE role='lecturer' ORDER BY name");
+$modules = $conn->query("SELECT m.*, u.name AS lecturer_name FROM modules m LEFT JOIN users u ON m.lecturer_id=u.user_id ORDER BY m.module_code, m.module_name");
 include "../includes/header.php";
 ?>
 <div class="card">
