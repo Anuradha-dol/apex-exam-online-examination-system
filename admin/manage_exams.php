@@ -11,27 +11,37 @@ if ($columnCheck && $columnCheck->num_rows === 0) {
 }
 
 if (isset($_POST['add_exam'])) {
-    $module_id = (int)$_POST['module_id'];
-    $exam_title = trim($_POST['exam_title']);
-    $duration = max(1, (int)$_POST['duration']);
+    $module_id = (int)($_POST['module_id'] ?? 0);
+    $exam_title = trim($_POST['exam_title'] ?? '');
+    $duration = max(1, (int)($_POST['duration'] ?? 0));
     $start_time = normalizeDateTimeInput($_POST['start_time'] ?? '');
     $end_time = normalizeDateTimeInput($_POST['end_time'] ?? '');
     $exam_instructions = trim($_POST['exam_instructions'] ?? '');
-    $created_by = $_SESSION['user_id'];
+    $created_by = (int)$_SESSION['user_id'];
 
-    $stmt = $conn->prepare("INSERT INTO exams (module_id, exam_title, duration, start_time, end_time, created_by, exam_instructions) VALUES (?,?,?,?,?,?,?)");
-    $stmt->bind_param("isissis", $module_id, $exam_title, $duration, $start_time, $end_time, $created_by, $exam_instructions);
-    $stmt->execute();
+    if ($module_id > 0 && $exam_title !== '') {
+        $stmt = $conn->prepare("INSERT INTO exams (module_id, exam_title, duration, start_time, end_time, created_by, exam_instructions) VALUES (?,?,?,?,?,?,?)");
+        $stmt->bind_param("isissis", $module_id, $exam_title, $duration, $start_time, $end_time, $created_by, $exam_instructions);
+        $stmt->execute();
+    }
+
+    header("Location: manage_exams.php");
+    exit();
 }
 
 if (isset($_GET['delete'])) {
-    $id = $_GET['delete'];
-    $stmt = $conn->prepare("DELETE FROM exams WHERE exam_id=?");
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
+    $id = (int)$_GET['delete'];
+    if ($id > 0) {
+        $stmt = $conn->prepare("DELETE FROM exams WHERE exam_id=?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+    }
+
+    header("Location: manage_exams.php");
+    exit();
 }
 
-$modules = $conn->query("SELECT * FROM modules");
+$modules = $conn->query("SELECT * FROM modules ORDER BY module_code, module_name");
 $exams = $conn->query("SELECT e.*, m.module_name FROM exams e JOIN modules m ON e.module_id=m.module_id ORDER BY e.exam_id DESC");
 include "../includes/header.php";
 ?>
