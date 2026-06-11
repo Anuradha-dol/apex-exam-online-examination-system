@@ -2,7 +2,8 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-$basePath = "/online_examination_system";
+require_once __DIR__ . "/base_path.php";
+$basePath = appBasePath();
 $showNav = isset($showNav) ? $showNav : true;
 $isLanding = !empty($isLanding);
 $bodyClass = trim(($bodyClass ?? "") . ($isLanding ? " landing-body" : ""));
