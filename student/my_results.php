@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 include "../includes/auth_check.php";
 checkRole('student');
 include "../config/db.php";
@@ -23,6 +23,22 @@ include "../includes/header.php";
     <p class="form-note">Review your completed exams and compare marks to your overall exam performance.</p>
     <div class="toolbar">
         <a href="dashboard.php" class="btn btn-outline">Back</a>
+    </div>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr><th>Exam</th><th>Marks</th><th>Date</th></tr>
+            </thead>
+            <tbody>
+                <?php while($r = $results->fetch_assoc()): ?>
+                <tr>
+                    <td><?= htmlspecialchars($r['exam_title']) ?></td>
+                    <td><?= (int)$r['marks'] ?> / <?= (int)$r['total_marks'] ?></td>
+                    <td><?= htmlspecialchars($r['submitted_at']) ?></td>
+                </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
     </div>
 </div>
 <?php include "../includes/footer.php"; ?>
