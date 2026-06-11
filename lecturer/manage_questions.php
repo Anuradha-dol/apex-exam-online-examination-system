@@ -47,6 +47,9 @@ include "../includes/header.php";
                 <tr><th>Exam</th><th>Question</th><th>Correct</th><th>Action</th></tr>
             </thead>
             <tbody>
+                <?php if ($questions->num_rows === 0): ?>
+                    <tr><td colspan="4" class="text-center">No questions found.</td></tr>
+                <?php else: ?>
                 <?php while($q = $questions->fetch_assoc()): ?>
                 <tr>
                     <td><?= htmlspecialchars($q['exam_title']) ?></td>
@@ -55,6 +58,7 @@ include "../includes/header.php";
                     <td><a class="btn danger" href="?delete=<?= (int)$q['question_id'] ?>" onclick="return confirm('Delete question?')">Delete</a></td>
                 </tr>
                 <?php endwhile; ?>
+                <?php endif; ?>
             </tbody>
         </table>
     </div>

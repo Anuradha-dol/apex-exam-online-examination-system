@@ -94,6 +94,9 @@ include "../includes/header.php";
                 <tr><th>Code</th><th>Name</th><th>Lecturer</th><th>Action</th></tr>
             </thead>
             <tbody>
+                <?php if ($modules->num_rows === 0): ?>
+                    <tr><td colspan="4" class="text-center">No modules found.</td></tr>
+                <?php else: ?>
                 <?php while($m = $modules->fetch_assoc()): ?>
                 <tr>
                     <td><?= htmlspecialchars($m['module_code']) ?></td>
@@ -107,6 +110,7 @@ include "../includes/header.php";
                     </td>
                 </tr>
                 <?php endwhile; ?>
+                <?php endif; ?>
             </tbody>
         </table>
     </div>

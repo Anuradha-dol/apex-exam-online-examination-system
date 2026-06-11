@@ -89,6 +89,9 @@ include "../includes/header.php";
                 <tr><th>Exam</th><th>Module</th><th>Window</th><th>Duration</th><th>Status</th><th>Action</th></tr>
             </thead>
             <tbody>
+                <?php if ($exams->num_rows === 0): ?>
+                    <tr><td colspan="6" class="text-center">No exams found.</td></tr>
+                <?php else: ?>
                 <?php while($e = $exams->fetch_assoc()): ?>
                     <?php $status = examWindowStatus($e); ?>
                     <tr>
@@ -100,6 +103,7 @@ include "../includes/header.php";
                         <td><a class="btn danger" href="?delete=<?= (int)$e['exam_id'] ?>" onclick="return confirm('Delete exam?')">Delete</a></td>
                     </tr>
                 <?php endwhile; ?>
+                <?php endif; ?>
             </tbody>
         </table>
     </div>
