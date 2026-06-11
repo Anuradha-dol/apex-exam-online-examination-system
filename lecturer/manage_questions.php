@@ -4,19 +4,36 @@ checkRole('lecturer');
 include "../config/db.php";
 
 $pageTitle = "Manage Questions | Apex Exam";
+$lecturer_id = (int)$_SESSION['user_id'];
+
 if (isset($_GET['delete'])) {
-    $id = $_GET['delete'];
-    $stmt = $conn->prepare("DELETE FROM questions WHERE question_id=?");
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
+    $id = (int)$_GET['delete'];
+    if ($id > 0) {
+        $stmt = $conn->prepare("
+            DELETE q FROM questions q
+            JOIN exams e ON q.exam_id=e.exam_id
+            JOIN modules m ON e.module_id=m.module_id
+            WHERE q.question_id=? AND m.lecturer_id=?
+        ");
+        $stmt->bind_param("ii", $id, $lecturer_id);
+        $stmt->execute();
+    }
+
+    header("Location: manage_questions.php");
+    exit();
 }
 
-$questions = $conn->query("
-SELECT q.*, e.exam_title 
-FROM questions q 
-JOIN exams e ON q.exam_id=e.exam_id 
+$questionStmt = $conn->prepare("
+SELECT q.*, e.exam_title
+FROM questions q
+JOIN exams e ON q.exam_id=e.exam_id
+JOIN modules m ON e.module_id=m.module_id
+WHERE m.lecturer_id=?
 ORDER BY q.question_id DESC
 ");
+$questionStmt->bind_param("i", $lecturer_id);
+$questionStmt->execute();
+$questions = $questionStmt->get_result();
 include "../includes/header.php";
 ?>
 <div class="card">

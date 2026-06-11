@@ -4,34 +4,64 @@ checkRole('lecturer');
 include "../config/db.php";
 
 $pageTitle = "Add Question | Apex Exam";
-if (isset($_POST['add_question'])) {
-    $exam_id = $_POST['exam_id'];
-    $question_text = $_POST['question_text'];
-    $a = $_POST['option_a'];
-    $b = $_POST['option_b'];
-    $c = $_POST['option_c'];
-    $d = $_POST['option_d'];
-    $correct = $_POST['correct_answer'];
+$lecturer_id = (int)$_SESSION['user_id'];
+$allowedAnswers = ['A', 'B', 'C', 'D'];
 
-    $stmt = $conn->prepare("INSERT INTO questions (exam_id, question_text, option_a, option_b, option_c, option_d, correct_answer) VALUES (?,?,?,?,?,?,?)");
-    $stmt->bind_param("issssss", $exam_id, $question_text, $a, $b, $c, $d, $correct);
-    $stmt->execute();
-    $msg = "Question added successfully.";
+if (isset($_POST['add_question'])) {
+    $exam_id = (int)($_POST['exam_id'] ?? 0);
+    $question_text = trim($_POST['question_text'] ?? '');
+    $a = trim($_POST['option_a'] ?? '');
+    $b = trim($_POST['option_b'] ?? '');
+    $c = trim($_POST['option_c'] ?? '');
+    $d = trim($_POST['option_d'] ?? '');
+    $correct = $_POST['correct_answer'] ?? '';
+
+    $examCheck = $conn->prepare("
+        SELECT e.exam_id
+        FROM exams e
+        JOIN modules m ON m.module_id=e.module_id
+        WHERE e.exam_id=? AND m.lecturer_id=?
+        LIMIT 1
+    ");
+    $examCheck->bind_param("ii", $exam_id, $lecturer_id);
+    $examCheck->execute();
+    $canUseExam = $examCheck->get_result()->num_rows > 0;
+
+    if ($canUseExam && $question_text !== '' && $a !== '' && $b !== '' && $c !== '' && $d !== '' && in_array($correct, $allowedAnswers, true)) {
+        $stmt = $conn->prepare("INSERT INTO questions (exam_id, question_text, option_a, option_b, option_c, option_d, correct_answer) VALUES (?,?,?,?,?,?,?)");
+        $stmt->bind_param("issssss", $exam_id, $question_text, $a, $b, $c, $d, $correct);
+        $stmt->execute();
+
+        header("Location: add_questions.php?added=1");
+        exit();
+    }
+
+    $error = "Please choose one of your exams and complete all question fields.";
 }
 
-$exams = $conn->query("SELECT * FROM exams");
+$examStmt = $conn->prepare("
+    SELECT e.exam_id, e.exam_title, m.module_code
+    FROM exams e
+    JOIN modules m ON m.module_id=e.module_id
+    WHERE m.lecturer_id=?
+    ORDER BY m.module_code, e.exam_title
+");
+$examStmt->bind_param("i", $lecturer_id);
+$examStmt->execute();
+$exams = $examStmt->get_result();
 include "../includes/header.php";
 ?>
 <div class="card">
     <h2>Add Question</h2>
-    <?php if(isset($msg)): ?><div class="alert alert-success"><?= htmlspecialchars($msg) ?></div><?php endif; ?>
+    <?php if(isset($_GET['added'])): ?><div class="alert alert-success">Question added successfully.</div><?php endif; ?>
+    <?php if(isset($error)): ?><div class="alert alert-danger"><?= htmlspecialchars($error) ?></div><?php endif; ?>
     <form method="POST" class="form-grid">
         <div class="form-group span-2">
             <label>Exam</label>
             <select name="exam_id" required>
                 <option value="">Select Exam</option>
                 <?php while($e = $exams->fetch_assoc()): ?>
-                    <option value="<?= (int)$e['exam_id'] ?>"><?= htmlspecialchars($e['exam_title']) ?></option>
+                    <option value="<?= (int)$e['exam_id'] ?>"><?= htmlspecialchars($e['module_code'] . ' - ' . $e['exam_title']) ?></option>
                 <?php endwhile; ?>
             </select>
         </div>
