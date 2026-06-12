@@ -28,6 +28,12 @@ Apex Exam supports the complete basic online exam process:
 4. The system calculates marks immediately and stores the result.
 5. Admins, lecturers, and students can view result records based on their dashboard access.
 
+## Project Report
+
+A detailed project overview report with UI screenshots, system functions, project workflow, and team member contributions is available here:
+
+[View Apex Exam Project Overview Report](ApexExam_Project_Overview_Report_FIXED.pdf)
+
 ## Technology Stack
 
 | Layer | Technology |
