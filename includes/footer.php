@@ -1,5 +1,6 @@
 <?php
-$basePath = "/online_examination_system";
+require_once __DIR__ . "/base_path.php";
+$basePath = appBasePath();
 $isLandingFooter = !empty($isLanding);
 ?>
 </main>
