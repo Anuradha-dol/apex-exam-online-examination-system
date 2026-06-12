@@ -3,7 +3,7 @@ date_default_timezone_set('Asia/Colombo');
 
 $host = "localhost";
 $user = "root";
-$pass = "Anu@20021214"; 
+$pass = "";
 $dbname = "online_exam_db";
 $port = 3306;
 
