@@ -263,6 +263,10 @@ Module-Exam-Management
 
 ---
 
+run 
+
+http://localhost/apex-exam-online-examination-system/index.php
+
 ## Conclusion
 
 Apex Exam is a complete online examination system that supports multiple user roles and important exam-related features. The project focuses on exam management, secure student exam flow, automatic submission, instant results, and result reporting.

@@ -133,12 +133,10 @@ include "includes/header.php";
     <div class="login-copy">
         <span class="eyebrow">Portal Access</span>
         <h2>Sign in to continue.</h2>
-        <p>Use your student, lecturer, or admin account to open the correct dashboard.</p>
     </div>
     <div class="auth-card">
         <div class="auth-header auth-header-sm">
             <h2>Login</h2>
-            <p>Enter your credentials to continue to your exam dashboard.</p>
         </div>
         <?php if (isset($_GET['login']) && $_GET['login'] === 'failed'): ?>
             <div class="alert alert-danger">Invalid email or password.</div>
