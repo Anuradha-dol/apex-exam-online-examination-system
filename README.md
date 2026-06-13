@@ -7,6 +7,7 @@ Our project is made for a local XAMPP/WAMP-style PHP environment. It does not ne
 ## Table of Contents
 
 - [Project Overview](#project-overview)
+- [Project Report and UI Preview](#project-report-and-ui-preview)
 - [Technology Stack](#technology-stack)
 - [Main Features](#main-features)
 - [User Roles and Permissions](#user-roles-and-permissions)
@@ -28,11 +29,18 @@ Apex Exam covers the main workflow needed for an online exam system:
 4. The system calculates marks immediately and stores the result.
 5. Admins, lecturers, and students can view result records based on their dashboard access.
 
-## Project Report
+## Project Report and UI Preview
 
-Our project report includes UI screenshots, system functions, project workflow, and team member contribution details:
+Our project report includes UI screenshots, system functions, project workflow, and team member contribution details. The 2K UI screenshots PDF includes the landing page capture in high resolution.
 
-[View Apex Exam Project Overview Report](docs/ApexExam_Project_Overview_Report.pdf)
+- [View Apex Exam Project Overview Report PDF](docs/ApexExam_Project_Overview_Report.pdf)
+- [View Apex Exam 2K UI Screenshots PDF](docs/ApexExam_UI_Screenshots_2K.pdf)
+
+### Landing Page Preview
+
+<a href="docs/screenshots/landing-page-2k.png">
+  <img src="docs/screenshots/landing-page-2k.png" alt="Apex Exam landing page 2K UI screenshot" width="100%">
+</a>
 
 ## Technology Stack
 
@@ -190,7 +198,11 @@ apex-exam-online-examination-system/
 |-- database/
 |   `-- online_exam.sql
 |-- docs/
-|   `-- ApexExam_Project_Overview_Report.pdf
+|   |-- ApexExam_Project_Overview_Report.pdf
+|   |-- ApexExam_UI_Screenshots_2K.pdf
+|   `-- screenshots/
+|       |-- landing-page-2k.png
+|       `-- landing-page-full-2k.png
 |-- includes/
 |   |-- auth_check.php
 |   |-- base_path.php
