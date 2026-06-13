@@ -32,7 +32,7 @@ Apex Exam supports the complete basic online exam process:
 
 A detailed project overview report with UI screenshots, system functions, project workflow, and team member contributions is available here:
 
-[View Apex Exam Project Overview Report](ApexExam_Project_Overview_Report_FIXED.pdf)
+[View Apex Exam Project Overview Report](docs/ApexExam_Project_Overview_Report.pdf)
 
 ## Technology Stack
 
@@ -188,6 +188,8 @@ apex-exam-online-examination-system/
 |   `-- db.php
 |-- database/
 |   `-- online_exam.sql
+|-- docs/
+|   `-- ApexExam_Project_Overview_Report.pdf
 |-- includes/
 |   |-- auth_check.php
 |   |-- base_path.php
