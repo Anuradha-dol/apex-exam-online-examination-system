@@ -1,8 +1,8 @@
 # Apex Exam - Online Examination System
 
-Apex Exam is a web-based online examination system built with PHP and MySQL. It provides separate dashboards for admins, lecturers, and students, allowing an educational institute to manage users, modules, exams, MCQ questions, timed exam attempts, and exam results from one application.
+Apex Exam is our web-based online examination project built with PHP and MySQL. It gives admins, lecturers, and students separate dashboards, so an educational institute can manage users, modules, exams, MCQ questions, timed exam attempts, and exam results in one place.
 
-The project is designed for a local XAMPP/WAMP-style PHP environment and does not require a PHP framework, Composer package installation, or a frontend build step.
+Our project is made for a local XAMPP/WAMP-style PHP environment. It does not need a PHP framework, Composer package installation, or a frontend build step.
 
 ## Table of Contents
 
@@ -20,7 +20,7 @@ The project is designed for a local XAMPP/WAMP-style PHP environment and does no
 
 ## Project Overview
 
-Apex Exam supports the complete basic online exam process:
+Apex Exam covers the main workflow needed for an online exam system:
 
 1. Admins create users, modules, and scheduled exams.
 2. Lecturers add MCQ questions to exams assigned to their modules.
@@ -30,7 +30,7 @@ Apex Exam supports the complete basic online exam process:
 
 ## Project Report
 
-A detailed project overview report with UI screenshots, system functions, project workflow, and team member contributions is available here:
+Our project report includes UI screenshots, system functions, project workflow, and team member contribution details:
 
 [View Apex Exam Project Overview Report](docs/ApexExam_Project_Overview_Report.pdf)
 
@@ -41,7 +41,7 @@ A detailed project overview report with UI screenshots, system functions, projec
 | Frontend | HTML5, CSS3, JavaScript |
 | Backend | PHP |
 | Database | MySQL |
-| Local Server | XAMPP, WAMP, MAMP, or any PHP/MySQL server |
+| Local Server | XAMPP, WAMP, MAMP, or another PHP/MySQL server |
 | Database Tool | phpMyAdmin or MySQL client |
 | Styling Assets | Custom CSS, SVG/PNG images |
 
@@ -114,7 +114,7 @@ A detailed project overview report with UI screenshots, system functions, projec
 
 ### User Interface
 
-- Landing page with project introduction and login form.
+- Landing page with the project introduction and login form.
 - Responsive dashboards for each user role.
 - Tables for users, modules, exams, questions, and results.
 - Status labels for open, upcoming, closed, submitted, expired, and in-progress exams.
@@ -139,7 +139,7 @@ A detailed project overview report with UI screenshots, system functions, projec
 
 ## Database Structure
 
-The database file is located at:
+The database file used by the project is located at:
 
 ```text
 database/online_exam.sql
@@ -151,7 +151,7 @@ The SQL file creates the database:
 online_exam_db
 ```
 
-Main database tables:
+Main tables used in the system:
 
 | Table | Purpose |
 | --- | --- |
@@ -269,7 +269,7 @@ The tracked database config file contains safe default values:
 config/db.php
 ```
 
-For a local database password, copy the example file:
+If your local database has a password, copy the example file:
 
 ```text
 config/db.local.example.php
@@ -281,7 +281,7 @@ Create a local-only file named:
 config/db.local.php
 ```
 
-Then update your local credentials inside `config/db.local.php`:
+Then update your own local credentials inside `config/db.local.php`:
 
 ```php
 return [
@@ -344,6 +344,8 @@ The database seed includes these accounts:
 
 ## Security and Validation Notes
 
+The project already includes these security and validation measures:
+
 - Database access uses prepared statements in the main form-processing flows.
 - Local database credentials should be stored in `config/db.local.php`, which is ignored by Git.
 - User passwords are stored as hashes, not plain text.
@@ -352,9 +354,11 @@ The database seed includes these accounts:
 - Exam submissions are validated against server-side deadlines, not only the browser timer.
 - Output values are escaped with `htmlspecialchars()` across the main pages to reduce unsafe rendering.
 
+For public hosting, the project should still be reviewed with production server settings, HTTPS, CSRF protection, and rate limiting in mind.
+
 ## Current Limitations
 
-- The project is intended for local educational/demo use.
+- The project is currently intended for local educational/demo use.
 - There is no email verification or password reset flow.
 - Lecturer result pages currently list result records; advanced charts and analytics can be added later.
 - Admin user editing is limited compared with module editing.
@@ -362,4 +366,4 @@ The database seed includes these accounts:
 
 ## Repository Description
 
-Apex Exam is a PHP and MySQL online examination system with role-based dashboards, module and exam management, MCQ question handling, timed student exam attempts, auto-submit, instant marks, and result history.
+Our Apex Exam project is a PHP and MySQL web application for online examinations. It includes role-based dashboards, module and exam management, MCQ question handling, timed student exam attempts, auto-submit, instant marks, and result history.
