@@ -185,7 +185,8 @@ apex-exam-online-examination-system/
 |   |-- register.php
 |   `-- register_process.php
 |-- config/
-|   `-- db.php
+|   |-- db.php
+|   `-- db.local.example.php
 |-- database/
 |   `-- online_exam.sql
 |-- docs/
@@ -262,21 +263,37 @@ The script will create and use the `online_exam_db` database.
 
 ### 5. Configure Database Connection
 
-Open:
+The tracked database config file contains safe default values:
 
 ```text
 config/db.php
 ```
 
-Update these values if your local MySQL configuration is different:
+For a local database password, copy the example file:
+
+```text
+config/db.local.example.php
+```
+
+Create a local-only file named:
+
+```text
+config/db.local.php
+```
+
+Then update your local credentials inside `config/db.local.php`:
 
 ```php
-$host = "localhost";
-$user = "root";
-$pass = "your_mysql_password";
-$dbname = "online_exam_db";
-$port = 3306;
+return [
+    "host" => "localhost",
+    "user" => "root",
+    "pass" => "your_mysql_password",
+    "dbname" => "online_exam_db",
+    "port" => 3306,
+];
 ```
+
+`config/db.local.php` is ignored by Git, so your local database password should not be committed.
 
 ### 6. Run the Application
 
@@ -328,6 +345,7 @@ The database seed includes these accounts:
 ## Security and Validation Notes
 
 - Database access uses prepared statements in the main form-processing flows.
+- Local database credentials should be stored in `config/db.local.php`, which is ignored by Git.
 - User passwords are stored as hashes, not plain text.
 - Role-specific pages are protected by session checks.
 - Student submissions are checked against exam attempts to reduce duplicate submissions.

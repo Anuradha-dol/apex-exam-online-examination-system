@@ -11,6 +11,9 @@ Thumbs.db
 *.tmp
 *.temp
 
+# Local configuration with machine-specific credentials
+/config/db.local.php
+
 # Dependency folders, if added later
 vendor/
 node_modules/

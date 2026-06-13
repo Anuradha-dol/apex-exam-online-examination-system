@@ -1,13 +1,29 @@
 <?php
 date_default_timezone_set('Asia/Colombo');
 
-$host = "localhost";
-$user = "root";
-$pass = "";
-$dbname = "online_exam_db";
-$port = 3306;
+$dbConfig = [
+    "host" => "localhost",
+    "user" => "root",
+    "pass" => "",
+    "dbname" => "online_exam_db",
+    "port" => 3306,
+];
 
-$conn = new mysqli($host, $user, $pass, $dbname, $port);
+$localConfigPath = __DIR__ . "/db.local.php";
+if (file_exists($localConfigPath)) {
+    $localConfig = require $localConfigPath;
+    if (is_array($localConfig)) {
+        $dbConfig = array_merge($dbConfig, $localConfig);
+    }
+}
+
+$conn = new mysqli(
+    $dbConfig["host"],
+    $dbConfig["user"],
+    $dbConfig["pass"],
+    $dbConfig["dbname"],
+    (int)$dbConfig["port"]
+);
 
 if ($conn->connect_error) {
     die("Database connection failed: " . $conn->connect_error);
