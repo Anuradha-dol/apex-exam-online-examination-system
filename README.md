@@ -4,6 +4,19 @@ Apex Exam is our web-based online examination project built with PHP and MySQL. 
 
 Our project is made for a local XAMPP/WAMP-style PHP environment. It does not need a PHP framework, Composer package installation, or a frontend build step.
 
+## Project Report and UI Preview
+
+Quick access for reviewing the project documentation and interface:
+
+- [View Apex Exam Project Overview Report PDF](docs/ApexExam_Project_Overview_Report.pdf)
+- [View Apex Exam 2K UI Screenshots PDF](docs/ApexExam_UI_Screenshots_2K.pdf)
+
+### Landing Page Preview
+
+<a href="docs/screenshots/landing-page-2k.png">
+  <img src="docs/screenshots/landing-page-2k.png" alt="Apex Exam landing page 2K UI screenshot" width="100%">
+</a>
+
 ## Table of Contents
 
 - [Project Overview](#project-overview)
@@ -28,19 +41,6 @@ Apex Exam covers the main workflow needed for an online exam system:
 3. Students view available exams, start an exam during the allowed time window, answer questions, and submit the paper.
 4. The system calculates marks immediately and stores the result.
 5. Admins, lecturers, and students can view result records based on their dashboard access.
-
-## Project Report and UI Preview
-
-Our project report includes UI screenshots, system functions, project workflow, and team member contribution details. The 2K UI screenshots PDF includes the landing page capture in high resolution.
-
-- [View Apex Exam Project Overview Report PDF](docs/ApexExam_Project_Overview_Report.pdf)
-- [View Apex Exam 2K UI Screenshots PDF](docs/ApexExam_UI_Screenshots_2K.pdf)
-
-### Landing Page Preview
-
-<a href="docs/screenshots/landing-page-2k.png">
-  <img src="docs/screenshots/landing-page-2k.png" alt="Apex Exam landing page 2K UI screenshot" width="100%">
-</a>
 
 ## Technology Stack
 
