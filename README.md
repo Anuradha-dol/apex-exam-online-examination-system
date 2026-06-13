@@ -133,7 +133,7 @@ A detailed project overview report with UI screenshots, system functions, projec
 | Member | Main Area | Contribution |
 | --- | --- | --- |
 | Anuradha | Smart Student Examination System | Student exam flow, available exam listing, exam start/resume behavior, countdown timer, auto-submit flow, single-attempt handling, instant result display. |
-| Damsi / Dasmi | Result Analytics and Reporting | Result viewing, student result history, admin/lecturer result records, marks display, result management pages. |
+| Damsi | Result Analytics and Reporting | Result viewing, student result history, admin/lecturer result records, marks display, result management pages. |
 | Supuni | Authentication and User Management | Login, registration, logout, session handling, role-based access control, user creation and user management. |
 | Pabasha | Module and Exam Management | Module CRUD, lecturer assignment, exam creation, exam schedule, duration setup, exam instructions, and exam management pages. |
 
