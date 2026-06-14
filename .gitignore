@@ -17,3 +17,24 @@ Thumbs.db
 # Dependency folders, if added later
 vendor/
 node_modules/
+# Local editor files
+**/.idea/
+**/.vscode/
+*.iml
+# Dependencies and build output
+**/node_modules/
+dist/
+**/dist/
+build/
+**/build/
+# Runtime uploads
+uploads/**
+**/uploads/**
+!uploads/
+!**/uploads/
+!uploads/.gitkeep
+!**/uploads/.gitkeep
+# Local secrets
+.env
+.env.*
+!.env.example
