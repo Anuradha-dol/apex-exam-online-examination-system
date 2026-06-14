@@ -1,11 +1,11 @@
 <?php
 date_default_timezone_set('Asia/Colombo');
 
-$host = "localhost";
-$user = "root";
-$pass = "Anu@20021214"; 
-$dbname = "online_exam_db";
-$port = 3306;
+$host = getenv('DB_HOST') ?: 'localhost';
+$user = getenv('DB_USER') ?: 'root';
+$pass = getenv('DB_PASSWORD') ?: '';
+$dbname = getenv('DB_NAME') ?: 'online_exam_db';
+$port = (int)(getenv('DB_PORT') ?: 3306);
 
 $conn = new mysqli($host, $user, $pass, $dbname, $port);
 
