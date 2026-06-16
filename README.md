@@ -8,8 +8,7 @@ Our project is made for a local XAMPP/WAMP-style PHP environment. It does not ne
 
 Quick access for reviewing the project documentation and interface:
 
-- [View Apex Exam Project Overview Report PDF](docs/ApexExam_Project_Overview_Report.pdf)
-- [View Apex Exam 2K UI Screenshots PDF](docs/ApexExam_UI_Screenshots_2K.pdf)
+- [View Apex Exam Project Overview Report PDF](docs/ApexExam_Project_Overview_Report_UI_Screenshots.pdf)
 
 ### Landing Page Preview
 
